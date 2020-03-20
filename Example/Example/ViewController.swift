@@ -12,12 +12,14 @@ import SelectableImageView
 class ViewController: UIViewController {
     @IBOutlet private weak var stackView: UIStackView!
     private let manager = SelectableImageViewManager()
+    private var imageViews: [SelectableImageView] { stackView.arrangedSubviews as! [SelectableImageView] }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         manager.delegate = self
-        manager.register(parentViewController: self, imageViews: stackView.arrangedSubviews as! [SelectableImageView])
+        imageViews.forEach { $0.cornerRadius = 8 }
+        manager.register(parentViewController: self, imageViews: imageViews)
     }
 }
 
@@ -32,7 +34,7 @@ extension ViewController: SelectableImageViewDelegate {
 }
 
 extension SelectableImageView {
-    @IBInspectable var cornerRadius: CGFloat {
+    var cornerRadius: CGFloat {
         get { imageView.layer.cornerRadius }
         set {
             imageView.layer.cornerRadius = newValue
