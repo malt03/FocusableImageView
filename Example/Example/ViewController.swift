@@ -19,4 +19,3 @@ class ViewController: UIViewController {
         manager.register(parentViewController: self, imageViews: stackView.arrangedSubviews as! [SelectableImageView])
     }
 }
-

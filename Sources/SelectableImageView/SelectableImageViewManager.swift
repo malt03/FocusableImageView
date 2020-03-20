@@ -10,6 +10,8 @@ import UIKit
 public final class SelectableImageViewManager {
     public init() {}
     
+    public var configuration = SelectableImageViewConfiguration.default
+    
     public func register(parentViewController: UIViewController, imageViews: [SelectableImageView]) {
         for imageView in imageViews {
             imageView.tappedHandler = { [weak self] (imageView) in
@@ -32,7 +34,11 @@ public final class SelectableImageViewManager {
         guard let viewController = viewController, let imageViews = imageViews else { return }
         let vc = ImagesViewController()
         let views = imageViews.compactMap { $0.value }
-        vc.prepare(selectableImageViews: views, selectedImageIndex: views.firstIndex(of: imageView) ?? 0)
+        vc.prepare(
+            configuration: configuration,
+            selectableImageViews: views,
+            selectedImageIndex: views.firstIndex(of: imageView) ?? 0
+        )
         viewController.present(vc, animated: true, completion: nil)
     }
 }

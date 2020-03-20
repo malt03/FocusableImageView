@@ -18,6 +18,7 @@ final class ImagesViewController: UIViewController {
     
     private var pannableConstraints = [UIImageView: NSLayoutConstraint]()
     
+    private var configuration: SelectableImageViewConfiguration!
     private var selectableImageViews: [SelectableImageView]!
     private var selectedImageIndex: Int!
     
@@ -31,7 +32,12 @@ final class ImagesViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
-    func prepare(selectableImageViews: [SelectableImageView], selectedImageIndex: Int) {
+    func prepare(
+        configuration: SelectableImageViewConfiguration,
+        selectableImageViews: [SelectableImageView],
+        selectedImageIndex: Int
+    ) {
+        self.configuration = configuration
         self.selectableImageViews = selectableImageViews
         self.selectedImageIndex = selectedImageIndex
         modalPresentationStyle = .overFullScreen
@@ -48,10 +54,12 @@ final class ImagesViewController: UIViewController {
         view.addGestureRecognizer(pan)
         
         view.backgroundColor = .clear
-        backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        backgroundView.backgroundColor = configuration.backgroundColor
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         scrollContainerView.translatesAutoresizingMaskIntoConstraints = false
+        let button = configuration.createDismissButton(backgroundView)
+        button.addTarget(self, action: #selector(close), for: .touchUpInside)
         
         scrollView.isPagingEnabled = true
         
@@ -84,10 +92,14 @@ final class ImagesViewController: UIViewController {
             pannableConstraints[target]?.constant = translation.y
         case .ended, .cancelled:
             lastPanInfo = (sender.velocity(in: view).y, target)
-            dismiss(animated: true, completion: nil)
+            close()
         default:
             break
         }
+    }
+    
+    @objc private func close() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -103,7 +115,7 @@ extension ImagesViewController: UIViewControllerTransitioningDelegate {
 
 extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.24
+        configuration.animationDuration
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
