@@ -8,19 +8,30 @@
 import UIKit
 
 public final class SelectableImageViewManager {
-    public static let shared = SelectableImageViewManager()
-    
-    private init() {}
+    public init() {}
     
     public func register(parentViewController: UIViewController, imageViews: [SelectableImageView]) {
         for imageView in imageViews {
-            imageView.tappedHandler = { [unowned self] (imageView) in
-                guard let holder = self.holders.first(where: { $0.hasImageView(imageView) }) else { return }
-                holder.present()
+            imageView.tappedHandler = { [weak self] in
+                self?.present()
             }
         }
-        holders.append(.init(viewController: parentViewController, imageViews: imageViews))
+        viewController = parentViewController
+        self.imageViews = imageViews.map { .init($0) }
     }
     
-    private var holders = [Holder]()
+    weak var viewController: UIViewController?
+    private var imageViews: [ImageViewHolder]?
+
+    private final class ImageViewHolder {
+        weak var value: SelectableImageView?
+        fileprivate init(_ value: SelectableImageView) { self.value = value }
+    }
+    
+    func present() {
+        guard let viewController = viewController, let imageViews = imageViews else { return }
+        let vc = ImagesViewController()
+        vc.prepare(selectableImageViews: imageViews.compactMap { $0.value })
+        viewController.present(vc, animated: true, completion: nil)
+    }
 }

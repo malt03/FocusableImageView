@@ -8,9 +8,18 @@
 import UIKit
 
 public class SelectableImageView: UIView {
+    @IBInspectable public var image: UIImage? {
+        get { imageView.image }
+        set { imageView.image = newValue }
+    }
+    public override var contentMode: UIView.ContentMode {
+        get { imageView.contentMode }
+        set { imageView.contentMode = newValue }
+    }
+    
     public let imageView = UIImageView()
     private var imageViewConstraints: [NSLayoutConstraint]?
-    var tappedHandler: ((SelectableImageView) -> Void)?
+    var tappedHandler: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,6 +61,6 @@ public class SelectableImageView: UIView {
     }
     
     @objc private func tapped() {
-        tappedHandler?(self)
+        tappedHandler?()
     }
 }

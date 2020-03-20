@@ -10,6 +10,7 @@ import UIKit
 final class ImagesViewController: UIViewController {
     private let backgroundView = UIView()
     private let scrollView = UIScrollView()
+    private let scrollContainerView = UIView()
     
     private var presenting = true
     private var selectableImageViews: [SelectableImageView]!
@@ -38,11 +39,13 @@ final class ImagesViewController: UIViewController {
         backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        scrollContainerView.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.isPagingEnabled = true
         
         view.addSubview(backgroundView)
         view.addSubview(scrollView)
+        scrollView.addSubview(scrollContainerView)
 
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: backgroundView.topAnchor),
@@ -53,6 +56,11 @@ final class ImagesViewController: UIViewController {
             view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: scrollContainerView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor),
+            scrollView.heightAnchor.constraint(equalTo: scrollContainerView.heightAnchor),
         ])
     }
 }
@@ -69,7 +77,7 @@ extension ImagesViewController: UIViewControllerTransitioningDelegate {
 
 extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.24
+        return 2
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -83,19 +91,26 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     private func presentAnimateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         transitionContext.containerView.addSubview(view)
         view.frame = transitionContext.containerView.bounds
+        scrollView.frame = view.bounds
+        scrollContainerView.frame = CGRect(
+            x: 0, y: 0,
+            width: CGFloat(selectableImageViews.count) * scrollView.bounds.width,
+            height: scrollView.bounds.height
+        )
         
         var constraints = [NSLayoutConstraint]()
-        var lastAnchor = scrollView.leadingAnchor
+        var lastAnchor = scrollContainerView.leadingAnchor
         for selectableImageView in selectableImageViews {
             selectableImageView.removeImageView()
             let imageView = selectableImageView.imageView
-            scrollView.addSubview(imageView)
+            scrollContainerView.addSubview(imageView)
             imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: scrollView)
             let imageRatio = imageView.image.map { $0.size.width / $0.size.height } ?? 1
             constraints.append(contentsOf: [
                 lastAnchor.constraint(equalTo: imageView.leadingAnchor),
                 imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
                 imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: imageRatio),
+                imageView.centerYAnchor.constraint(equalTo: scrollContainerView.centerYAnchor),
             ])
             lastAnchor = imageView.trailingAnchor
         }
