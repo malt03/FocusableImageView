@@ -13,8 +13,10 @@ final class ImagesViewController: UIViewController {
     private let scrollContainerView = UIView()
     
     private var presenting = true
-    private var selectableImageViews: [SelectableImageView]!
     private var constraints: [NSLayoutConstraint]?
+    
+    private var selectableImageViews: [SelectableImageView]!
+    private var selectedImageIndex: Int!
     
     override func viewWillAppear(_ animated: Bool) {
         presenting = true
@@ -26,8 +28,9 @@ final class ImagesViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
-    func prepare(selectableImageViews: [SelectableImageView]) {
+    func prepare(selectableImageViews: [SelectableImageView], selectedImageIndex: Int) {
         self.selectableImageViews = selectableImageViews
+        self.selectedImageIndex = selectedImageIndex
         modalPresentationStyle = .overFullScreen
         transitioningDelegate = self
     }
@@ -97,6 +100,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
             width: CGFloat(selectableImageViews.count) * scrollView.bounds.width,
             height: scrollView.bounds.height
         )
+        scrollView.contentOffset.x = scrollView.bounds.width * CGFloat(selectedImageIndex)
         
         var constraints = [NSLayoutConstraint]()
         var lastAnchor = scrollContainerView.leadingAnchor

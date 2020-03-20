@@ -19,7 +19,7 @@ public class SelectableImageView: UIView {
     
     public let imageView = UIImageView()
     private var imageViewConstraints: [NSLayoutConstraint]?
-    var tappedHandler: (() -> Void)?
+    var tappedHandler: ((SelectableImageView) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,6 +61,6 @@ public class SelectableImageView: UIView {
     }
     
     @objc private func tapped() {
-        tappedHandler?()
+        tappedHandler?(self)
     }
 }

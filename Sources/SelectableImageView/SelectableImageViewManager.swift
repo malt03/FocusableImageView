@@ -12,8 +12,8 @@ public final class SelectableImageViewManager {
     
     public func register(parentViewController: UIViewController, imageViews: [SelectableImageView]) {
         for imageView in imageViews {
-            imageView.tappedHandler = { [weak self] in
-                self?.present()
+            imageView.tappedHandler = { [weak self] (imageView) in
+                self?.present(imageView: imageView)
             }
         }
         viewController = parentViewController
@@ -28,10 +28,11 @@ public final class SelectableImageViewManager {
         fileprivate init(_ value: SelectableImageView) { self.value = value }
     }
     
-    func present() {
+    func present(imageView: SelectableImageView) {
         guard let viewController = viewController, let imageViews = imageViews else { return }
         let vc = ImagesViewController()
-        vc.prepare(selectableImageViews: imageViews.compactMap { $0.value })
+        let views = imageViews.compactMap { $0.value }
+        vc.prepare(selectableImageViews: views, selectedImageIndex: views.firstIndex(of: imageView) ?? 0)
         viewController.present(vc, animated: true, completion: nil)
     }
 }
