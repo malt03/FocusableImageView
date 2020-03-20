@@ -21,6 +21,7 @@ final class ImagesViewController: UIViewController {
     private var configuration: SelectableImageViewConfiguration!
     private var selectableImageViews: [SelectableImageView]!
     private var selectedImageIndex: Int!
+    private var dismissButton: UIButton?
     
     override func viewWillAppear(_ animated: Bool) {
         presenting = true
@@ -58,8 +59,6 @@ final class ImagesViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         scrollContainerView.translatesAutoresizingMaskIntoConstraints = false
-        let button = configuration.createDismissButton(backgroundView)
-        button.addTarget(self, action: #selector(close), for: .touchUpInside)
         
         scrollView.isPagingEnabled = true
         
@@ -82,6 +81,10 @@ final class ImagesViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor),
             scrollView.heightAnchor.constraint(equalTo: scrollContainerView.heightAnchor),
         ])
+
+        let button = configuration.createDismissButton?(view)
+        button?.addTarget(self, action: #selector(close), for: .touchUpInside)
+        dismissButton = button
     }
     
     @objc private func panned(_ sender: UIPanGestureRecognizer) {
@@ -142,6 +145,8 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         
         scrollView.contentOffset.x = scrollView.bounds.width * CGFloat(selectedImageIndex)
         
+        view.layoutIfNeeded()
+        
         var lastAnchor = scrollContainerView.leadingAnchor
         for selectableImageView in selectableImageViews {
             selectableImageView.removeImageView()
@@ -168,10 +173,12 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         self.constraints = constraints
         
         backgroundView.alpha = 0
+        dismissButton?.alpha = 0
         backgroundView.frame = view.bounds
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             self.backgroundView.alpha = 1
+            self.dismissButton?.alpha = 1
             self.view.layoutIfNeeded()
         }, completion: { _ in
             transitionContext.completeTransition(true)
@@ -216,6 +223,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
             initialSpringVelocity: velocity,
             animations: {
                 self.backgroundView.alpha = 0
+                self.dismissButton?.alpha = 0
                 self.view.layoutIfNeeded()
             },
             completion: { _ in
