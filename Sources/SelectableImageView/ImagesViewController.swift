@@ -18,6 +18,7 @@ final class ImagesViewController: UIViewController {
     
     private var pannableConstraints = [UIImageView: NSLayoutConstraint]()
     
+    private weak var delegate: SelectableImageViewDelegate?
     private var configuration: SelectableImageViewConfiguration!
     private var selectableImageViews: [SelectableImageView]!
     private var selectedImageIndex: Int!
@@ -34,10 +35,12 @@ final class ImagesViewController: UIViewController {
     }
     
     func prepare(
+        delegate: SelectableImageViewDelegate?,
         configuration: SelectableImageViewConfiguration,
         selectableImageViews: [SelectableImageView],
         selectedImageIndex: Int
     ) {
+        self.delegate = delegate
         self.configuration = configuration
         self.selectableImageViews = selectableImageViews
         self.selectedImageIndex = selectedImageIndex
@@ -177,6 +180,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         backgroundView.frame = view.bounds
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+            self.delegate?.selectableImageViewPresentAnimation(views: self.selectableImageViews)
             self.backgroundView.alpha = 1
             self.dismissButton?.alpha = 1
             self.view.layoutIfNeeded()
@@ -222,6 +226,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
             usingSpringWithDamping: 1,
             initialSpringVelocity: velocity,
             animations: {
+                self.delegate?.selectableImageViewDismissAnimation(views: self.selectableImageViews)
                 self.backgroundView.alpha = 0
                 self.dismissButton?.alpha = 0
                 self.view.layoutIfNeeded()

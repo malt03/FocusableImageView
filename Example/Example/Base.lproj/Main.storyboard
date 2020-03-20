@@ -15,51 +15,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YZX-va-4YC">
-                                <rect key="frame" x="182" y="348" width="50" height="200"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YZX-va-4YC">
+                                <rect key="frame" x="157" y="290" width="100" height="316"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="cln-Ir-FTt" customClass="SelectableImageView" customModule="SelectableImageView">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="cln-Ir-FTt" customClass="SelectableImageView" customModule="SelectableImageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="1UC-iv-kOY"/>
-                                            <constraint firstAttribute="width" constant="50" id="4uH-qc-HDu"/>
+                                            <constraint firstAttribute="height" constant="100" id="1UC-iv-kOY"/>
+                                            <constraint firstAttribute="width" constant="100" id="4uH-qc-HDu"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="img0"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="joK-un-8Nq" customClass="SelectableImageView" customModule="SelectableImageView">
-                                        <rect key="frame" x="0.0" y="50" width="50" height="50"/>
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="joK-un-8Nq" customClass="SelectableImageView" customModule="SelectableImageView">
+                                        <rect key="frame" x="0.0" y="108" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="0Rl-uB-YtY"/>
-                                            <constraint firstAttribute="width" constant="50" id="KCc-ho-vCg"/>
+                                            <constraint firstAttribute="height" constant="100" id="0Rl-uB-YtY"/>
+                                            <constraint firstAttribute="width" constant="100" id="KCc-ho-vCg"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="img1"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="2Pz-96-5en" customClass="SelectableImageView" customModule="SelectableImageView">
-                                        <rect key="frame" x="0.0" y="100" width="50" height="50"/>
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Pz-96-5en" customClass="SelectableImageView" customModule="SelectableImageView">
+                                        <rect key="frame" x="0.0" y="216" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Ppj-04-jdW"/>
-                                            <constraint firstAttribute="width" constant="50" id="W1x-ek-yvr"/>
+                                            <constraint firstAttribute="height" constant="100" id="Ppj-04-jdW"/>
+                                            <constraint firstAttribute="width" constant="100" id="W1x-ek-yvr"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="img2"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="KgJ-G8-OwA" customClass="SelectableImageView" customModule="SelectableImageView">
-                                        <rect key="frame" x="0.0" y="150" width="50" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="AOn-bj-eLX"/>
-                                            <constraint firstAttribute="width" constant="50" id="U3w-xU-0PH"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="img3"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
@@ -82,9 +80,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="img0" width="782" height="873"/>
-        <image name="img1" width="947" height="1019"/>
-        <image name="img2" width="779" height="747"/>
-        <image name="img3" width="551" height="800"/>
+        <image name="img0" width="300" height="400"/>
+        <image name="img1" width="400" height="300"/>
+        <image name="img2" width="400" height="400"/>
     </resources>
 </document>

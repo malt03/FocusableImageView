@@ -7,10 +7,16 @@
 
 import UIKit
 
+public protocol SelectableImageViewDelegate: class {
+    func selectableImageViewPresentAnimation(views: [SelectableImageView])
+    func selectableImageViewDismissAnimation(views: [SelectableImageView])
+}
+
 public final class SelectableImageViewManager {
     public init() {}
     
     public var configuration = SelectableImageViewConfiguration.default
+    public weak var delegate: SelectableImageViewDelegate?
     
     public func register(parentViewController: UIViewController, imageViews: [SelectableImageView]) {
         for imageView in imageViews {
@@ -35,6 +41,7 @@ public final class SelectableImageViewManager {
         let vc = ImagesViewController()
         let views = imageViews.compactMap { $0.value }
         vc.prepare(
+            delegate: delegate,
             configuration: configuration,
             selectableImageViews: views,
             selectedImageIndex: views.firstIndex(of: imageView) ?? 0
