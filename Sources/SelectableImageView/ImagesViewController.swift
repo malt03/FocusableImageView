@@ -34,9 +34,15 @@ final class ImagesViewController: UIViewController {
         modalPresentationStyle = .overFullScreen
         transitioningDelegate = self
     }
-
+    
+    @objc private func tapped() {
+        dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        scrollView.addGestureRecognizer(tap)
         
         view.backgroundColor = .clear
         backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -80,7 +86,7 @@ extension ImagesViewController: UIViewControllerTransitioningDelegate {
 
 extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 2
+        return 0.5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -92,23 +98,27 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     }
     
     private func presentAnimateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        var constraints = [NSLayoutConstraint]()
+
         transitionContext.containerView.addSubview(view)
         view.frame = transitionContext.containerView.bounds
         scrollView.frame = view.bounds
+        let widthMultiplier = CGFloat(selectableImageViews.count)
         scrollContainerView.frame = CGRect(
             x: 0, y: 0,
-            width: CGFloat(selectableImageViews.count) * scrollView.bounds.width,
+            width: widthMultiplier * scrollView.bounds.width,
             height: scrollView.bounds.height
         )
+        scrollContainerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: widthMultiplier).isActive = true
+        
         scrollView.contentOffset.x = scrollView.bounds.width * CGFloat(selectedImageIndex)
         
-        var constraints = [NSLayoutConstraint]()
         var lastAnchor = scrollContainerView.leadingAnchor
         for selectableImageView in selectableImageViews {
             selectableImageView.removeImageView()
             let imageView = selectableImageView.imageView
             scrollContainerView.addSubview(imageView)
-            imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: scrollView)
+            imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
             let imageRatio = imageView.image.map { $0.size.width / $0.size.height } ?? 1
             constraints.append(contentsOf: [
                 lastAnchor.constraint(equalTo: imageView.leadingAnchor),
@@ -137,50 +147,37 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     }
     
     private func dismissAnimateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-//        if let constraints = constraints {
-//            NSLayoutConstraint.deactivate(constraints)
-//        }
-//        constraints = nil
-//
-//        let targetRect = sourceRect
-//        view.addConstraints(
-//            NSLayoutConstraint.constraints(
-//                withVisualFormat: "|-(\(targetRect.origin.x))-[v(==\(targetRect.width))]",
-//                options: [],
-//                metrics: nil,
-//                views: ["v": sourceImageView.innerImageView]
-//                ) + NSLayoutConstraint.constraints(
-//                    withVisualFormat: "V:|-(\(targetRect.origin.y))-[v(==\(targetRect.height))]",
-//                    options: [],
-//                    metrics: nil,
-//                    views: ["v": sourceImageView.innerImageView]
-//            )
-//        )
-//
-//        let velocity: CGFloat
-//        if let lastVelocityY = lastPanVelocityY {
-//            let fromCenterY = sourceImageView.innerImageView.center.y
-//            let targetCenterY = targetRect.origin.y + targetRect.height / 2
-//            velocity = lastVelocityY / (targetCenterY - fromCenterY)
-//        } else {
-//            velocity = 0
-//        }
-//        UIView.animate(
-//            withDuration: transitionDuration(using: transitionContext),
-//            delay: 0,
-//            usingSpringWithDamping: 1,
-//            initialSpringVelocity: velocity,
-//            options: .curveLinear,
-//            animations: {
-//                self.sourceImageView.cornerRadius = self.cornerRadius
-//                self.backgroundView.alpha = 0
-//                self.closeButton.alpha = 0
-//                self.view.layoutIfNeeded()
-//        },
-//            completion: { _ in
-//                self.sourceImageView.addSubviewWithFillConstraints(self.sourceImageView.innerImageView)
-//                transitionContext.completeTransition(true)
-//        }
-//        )
+        if let constraints = constraints {
+            NSLayoutConstraint.deactivate(constraints)
+        }
+        constraints = nil
+
+        var tmpConstraints = [NSLayoutConstraint]()
+        for selectableImageView in self.selectableImageViews {
+            let imageView = selectableImageView.imageView
+            let newRect = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
+            tmpConstraints.append(contentsOf: [
+                imageView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: newRect.minX),
+                imageView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: newRect.minY),
+                imageView.widthAnchor.constraint(equalToConstant: newRect.width),
+                imageView.heightAnchor.constraint(equalToConstant: newRect.height),
+            ])
+        }
+        
+        NSLayoutConstraint.activate(tmpConstraints)
+        
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
+            animations: {
+                self.backgroundView.alpha = 0
+                self.view.layoutIfNeeded()
+            },
+            completion: { _ in
+                NSLayoutConstraint.deactivate(tmpConstraints)
+                self.selectableImageViews.forEach { $0.imageView.removeFromSuperview() }
+                self.selectableImageViews.forEach { $0.addImageView() }
+                transitionContext.completeTransition(true)
+            }
+        )
     }
 }
