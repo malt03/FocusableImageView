@@ -14,6 +14,9 @@ final class ImagesViewController: UIViewController {
     
     private var presenting = true
     private var constraints: [NSLayoutConstraint]?
+    private var lastPanInfo: (velocityY: CGFloat, targetImageView: UIImageView)?
+    
+    private var pannableConstraints = [UIImageView: NSLayoutConstraint]()
     
     private var selectableImageViews: [SelectableImageView]!
     private var selectedImageIndex: Int!
@@ -41,8 +44,8 @@ final class ImagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
-        scrollView.addGestureRecognizer(tap)
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panned(_:)))
+        view.addGestureRecognizer(pan)
         
         view.backgroundColor = .clear
         backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -72,6 +75,20 @@ final class ImagesViewController: UIViewController {
             scrollView.heightAnchor.constraint(equalTo: scrollContainerView.heightAnchor),
         ])
     }
+    
+    @objc private func panned(_ sender: UIPanGestureRecognizer) {
+        guard let target = pannableConstraints.keys.first(where: { $0.bounds.contains(sender.location(in: $0)) }) else { return }
+        switch sender.state {
+        case .changed:
+            let translation = sender.translation(in: view)
+            pannableConstraints[target]?.constant = translation.y
+        case .ended, .cancelled:
+            lastPanInfo = (sender.velocity(in: view).y, target)
+            dismiss(animated: true, completion: nil)
+        default:
+            break
+        }
+    }
 }
 
 extension ImagesViewController: UIViewControllerTransitioningDelegate {
@@ -86,7 +103,7 @@ extension ImagesViewController: UIViewControllerTransitioningDelegate {
 
 extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 0.24
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -117,16 +134,19 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         for selectableImageView in selectableImageViews {
             selectableImageView.removeImageView()
             let imageView = selectableImageView.imageView
+            
             scrollContainerView.addSubview(imageView)
             imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
             let imageRatio = imageView.image.map { $0.size.width / $0.size.height } ?? 1
+            let centerYConstraint = imageView.centerYAnchor.constraint(equalTo: scrollContainerView.centerYAnchor)
             constraints.append(contentsOf: [
                 lastAnchor.constraint(equalTo: imageView.leadingAnchor),
                 imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
                 imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: imageRatio),
-                imageView.centerYAnchor.constraint(equalTo: scrollContainerView.centerYAnchor),
+                centerYConstraint,
             ])
             lastAnchor = imageView.trailingAnchor
+            pannableConstraints[imageView] = centerYConstraint
         }
         if let last = selectableImageViews.last {
             constraints.append(last.imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor))
@@ -153,9 +173,11 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         constraints = nil
 
         var tmpConstraints = [NSLayoutConstraint]()
+        var imageViewTargetRects = [UIImageView: CGRect]()
         for selectableImageView in self.selectableImageViews {
             let imageView = selectableImageView.imageView
             let newRect = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
+            imageViewTargetRects[imageView] = newRect
             tmpConstraints.append(contentsOf: [
                 imageView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: newRect.minX),
                 imageView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: newRect.minY),
@@ -166,8 +188,20 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         
         NSLayoutConstraint.activate(tmpConstraints)
         
+        let velocity: CGFloat
+        if let lastPanInfo = lastPanInfo, let targetRect = imageViewTargetRects[lastPanInfo.targetImageView] {
+            let fromCenterY = lastPanInfo.targetImageView.center.y
+            let targetCenterY = targetRect.origin.y + targetRect.height / 2
+            velocity = lastPanInfo.velocityY / (targetCenterY - fromCenterY)
+        } else {
+            velocity = 0
+        }
+        
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: velocity,
             animations: {
                 self.backgroundView.alpha = 0
                 self.view.layoutIfNeeded()
