@@ -11,6 +11,7 @@ final class ImagesViewController: UIViewController {
     private let backgroundView = UIView()
     private let scrollView = UIScrollView()
     private let scrollContainerView = UIView()
+    private let pageControl = UIPageControl()
     
     private var presenting = true
     private var constraints: [NSLayoutConstraint]?
@@ -62,12 +63,19 @@ final class ImagesViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         scrollContainerView.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delegate = self
         
         view.addSubview(backgroundView)
         view.addSubview(scrollView)
+        backgroundView.addSubview(pageControl)
         scrollView.addSubview(scrollContainerView)
+        
+        pageControl.numberOfPages = selectableImageViews.count
+        pageControl.currentPage = selectedImageIndex
 
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: backgroundView.topAnchor),
@@ -78,6 +86,8 @@ final class ImagesViewController: UIViewController {
             view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            backgroundView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 8),
+            backgroundView.centerXAnchor.constraint(equalTo: pageControl.centerXAnchor),
             scrollView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: scrollContainerView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor),
@@ -106,6 +116,13 @@ final class ImagesViewController: UIViewController {
     
     @objc private func close() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ImagesViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = Int((scrollView.contentOffset.x / scrollView.bounds.width) + 0.5)
+        pageControl.currentPage = min(max(0, page), pageControl.numberOfPages - 1)
     }
 }
 
