@@ -15,12 +15,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		"FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FocusableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* FocusableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageView.swift; sourceTree = "<group>"; };
 		OBJ_11 /* FocusableImageViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageViewConfiguration.swift; sourceTree = "<group>"; };
 		OBJ_12 /* FocusableImageViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageViewManager.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
-		"FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FocusableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,13 +34,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_13 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Tests;
-			sourceTree = SOURCE_ROOT;
-		};
 		OBJ_14 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -49,15 +42,13 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_13 /* Tests */,
 				OBJ_14 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -129,7 +120,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
