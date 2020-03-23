@@ -2,7 +2,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/malt03/FocusableImageView/master/readme/Screenshot.gif)
 
-## Usage
+## Minimum Example
 
 ```swift
 import UIKit
@@ -19,6 +19,23 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+## Installation
+### [SwiftPM](https://github.com/apple/swift-package-manager) (Recommended)
+
+- On Xcode, click `File` > `Swift Packages` > `Add Package Dependency...`
+- Input `https://github.com/malt03/FocusableImageView.git`
+
+### [Carthage](https://github.com/Carthage/Carthage)
+
+- Insert `github "malt03/FocusableImageView"` to your Cartfile.
+- Run `carthage update`.
+- Link your app with `FocusableImageView.framework` in `Carthage/Build`.
+
+### [CocoaPods](https://github.com/cocoapods/cocoapods)
+
+- Insert `pod 'FocusableImageView'` to your Podfile.
+- Run `pod install`.
 
 ## Advanced Example
 ### Access to inner UIImageView
