@@ -1,4 +1,4 @@
-# FocusableImageView [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager) ![License](https://img.shields.io/github/license/malt03/FocusableImageView.svg)
+# FocusableImageView [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) [![CocoaPods](https://img.shields.io/cocoapods/v/FocusableImageView.svg?style=flat)](http://cocoapods.org/pods/FocusableImageView) ![License](https://img.shields.io/github/license/malt03/FocusableImageView.svg)
 
 ![Screenshot](https://raw.githubusercontent.com/malt03/FocusableImageView/master/readme/Screenshot.gif)
 
