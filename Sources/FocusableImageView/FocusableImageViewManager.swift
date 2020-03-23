@@ -18,7 +18,7 @@ public final class FocusableImageViewManager {
     public var configuration = FocusableImageViewConfiguration.default
     public weak var delegate: FocusableImageViewDelegate?
     
-    public func register(parentViewController: UIViewController, imageViews: [FocusableImageView]) {
+    public func register<S: Sequence>(parentViewController: UIViewController, imageViews: S) where S.Element == FocusableImageView {
         for imageView in imageViews {
             imageView.tappedHandler = { [weak self] (imageView) in
                 self?.present(imageView: imageView)
