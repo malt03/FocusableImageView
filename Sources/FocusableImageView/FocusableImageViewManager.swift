@@ -1,24 +1,24 @@
 //
-//  SelectableImageViewManager.swift
-//  SelectableImageView
+//  FocusableImageViewManager.swift
+//  FocusableImageView
 //
 //  Created by Koji Murata on 2020/03/20.
 //
 
 import UIKit
 
-public protocol SelectableImageViewDelegate: class {
-    func selectableImageViewPresentAnimation(views: [SelectableImageView])
-    func selectableImageViewDismissAnimation(views: [SelectableImageView])
+public protocol FocusableImageViewDelegate: class {
+    func selectableImageViewPresentAnimation(views: [FocusableImageView])
+    func selectableImageViewDismissAnimation(views: [FocusableImageView])
 }
 
-public final class SelectableImageViewManager {
+public final class FocusableImageViewManager {
     public init() {}
     
-    public var configuration = SelectableImageViewConfiguration.default
-    public weak var delegate: SelectableImageViewDelegate?
+    public var configuration = FocusableImageViewConfiguration.default
+    public weak var delegate: FocusableImageViewDelegate?
     
-    public func register(parentViewController: UIViewController, imageViews: [SelectableImageView]) {
+    public func register(parentViewController: UIViewController, imageViews: [FocusableImageView]) {
         for imageView in imageViews {
             imageView.tappedHandler = { [weak self] (imageView) in
                 self?.present(imageView: imageView)
@@ -32,11 +32,11 @@ public final class SelectableImageViewManager {
     private var imageViews: [ImageViewHolder]?
 
     private final class ImageViewHolder {
-        weak var value: SelectableImageView?
-        fileprivate init(_ value: SelectableImageView) { self.value = value }
+        weak var value: FocusableImageView?
+        fileprivate init(_ value: FocusableImageView) { self.value = value }
     }
     
-    func present(imageView: SelectableImageView) {
+    func present(imageView: FocusableImageView) {
         guard let viewController = viewController, let imageViews = imageViews else { return }
         let vc = ImagesViewController()
         let views = imageViews.compactMap { $0.value }

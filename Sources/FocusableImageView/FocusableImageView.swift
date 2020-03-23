@@ -1,13 +1,13 @@
 //
-//  SelectableImageView.swift
-//  SelectableImageView
+//  FocusableImageView.swift
+//  FocusableImageView
 //
 //  Created by Koji Murata on 2020/03/20.
 //
 
 import UIKit
 
-public class SelectableImageView: UIView {
+public class FocusableImageView: UIView {
     @IBInspectable public var image: UIImage? {
         get { imageView.image }
         set { imageView.image = newValue }
@@ -19,7 +19,7 @@ public class SelectableImageView: UIView {
     
     public let imageView = UIImageView()
     private var imageViewConstraints: [NSLayoutConstraint]?
-    var tappedHandler: ((SelectableImageView) -> Void)?
+    var tappedHandler: ((FocusableImageView) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -1,7 +1,7 @@
 import XCTest
 
-import SelectableImageViewTests
+import FocusableImageViewTests
 
 var tests = [XCTestCaseEntry]()
-tests += SelectableImageViewTests.allTests()
+tests += FocusableImageViewTests.allTests()
 XCTMain(tests)

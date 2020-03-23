@@ -18,7 +18,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YZX-va-4YC">
                                 <rect key="frame" x="157" y="290" width="100" height="316"/>
                                 <subviews>
-                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="cln-Ir-FTt" customClass="SelectableImageView" customModule="SelectableImageView">
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="cln-Ir-FTt" customClass="FocusableImageView" customModule="FocusableImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -29,7 +29,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="img0"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="joK-un-8Nq" customClass="SelectableImageView" customModule="SelectableImageView">
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="joK-un-8Nq" customClass="FocusableImageView" customModule="FocusableImageView">
                                         <rect key="frame" x="0.0" y="108" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -40,7 +40,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="img1"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Pz-96-5en" customClass="SelectableImageView" customModule="SelectableImageView">
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Pz-96-5en" customClass="FocusableImageView" customModule="FocusableImageView">
                                         <rect key="frame" x="0.0" y="216" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>

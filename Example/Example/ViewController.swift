@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import SelectableImageView
+import FocusableImageView
 
 class ViewController: UIViewController {
     @IBOutlet private weak var stackView: UIStackView!
-    private let manager = SelectableImageViewManager()
-    private var imageViews: [SelectableImageView] { stackView.arrangedSubviews as! [SelectableImageView] }
+    private let manager = FocusableImageViewManager()
+    private var imageViews: [FocusableImageView] { stackView.arrangedSubviews as! [FocusableImageView] }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,17 +23,17 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: SelectableImageViewDelegate {
-    func selectableImageViewPresentAnimation(views: [SelectableImageView]) {
+extension ViewController: FocusableImageViewDelegate {
+    func selectableImageViewPresentAnimation(views: [FocusableImageView]) {
         views.forEach { $0.cornerRadius = 0 }
     }
     
-    func selectableImageViewDismissAnimation(views: [SelectableImageView]) {
+    func selectableImageViewDismissAnimation(views: [FocusableImageView]) {
         views.forEach { $0.cornerRadius = 8 }
     }
 }
 
-extension SelectableImageView {
+extension FocusableImageView {
     var cornerRadius: CGFloat {
         get { imageView.layer.cornerRadius }
         set {

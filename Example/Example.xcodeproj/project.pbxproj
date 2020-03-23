@@ -13,8 +13,8 @@
 		ED7DBF7C2424FB0400643701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7DBF7A2424FB0400643701 /* Main.storyboard */; };
 		ED7DBF7E2424FB0500643701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED7DBF7D2424FB0500643701 /* Assets.xcassets */; };
 		ED7DBF812424FB0500643701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7DBF7F2424FB0500643701 /* LaunchScreen.storyboard */; };
-		ED7DBF8A2425010900643701 /* SelectableImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DBF892425010900643701 /* SelectableImageView.framework */; };
-		ED7DBF8B2425010900643701 /* SelectableImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DBF892425010900643701 /* SelectableImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED7DBF8A2425010900643701 /* FocusableImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DBF892425010900643701 /* FocusableImageView.framework */; };
+		ED7DBF8B2425010900643701 /* FocusableImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DBF892425010900643701 /* FocusableImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				ED7DBF8B2425010900643701 /* SelectableImageView.framework in Embed Frameworks */,
+				ED7DBF8B2425010900643701 /* FocusableImageView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +40,7 @@
 		ED7DBF7D2424FB0500643701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED7DBF802424FB0500643701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED7DBF822424FB0500643701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED7DBF892425010900643701 /* SelectableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SelectableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7DBF892425010900643701 /* FocusableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FocusableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED7DBF8A2425010900643701 /* SelectableImageView.framework in Frameworks */,
+				ED7DBF8A2425010900643701 /* FocusableImageView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 		ED7DBF882425010900643701 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ED7DBF892425010900643701 /* SelectableImageView.framework */,
+				ED7DBF892425010900643701 /* FocusableImageView.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

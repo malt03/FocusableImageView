@@ -1,12 +1,12 @@
 import XCTest
-@testable import SelectableImageView
+@testable import FocusableImageView
 
-final class SelectableImageViewTests: XCTestCase {
+final class FocusableImageViewTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(SelectableImageView().text, "Hello, World!")
+        XCTAssertEqual(FocusableImageView().text, "Hello, World!")
     }
 
     static var allTests = [

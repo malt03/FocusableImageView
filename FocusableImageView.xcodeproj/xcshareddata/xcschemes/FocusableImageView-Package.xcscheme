@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SelectableImageView::SelectableImageView"
-               BuildableName = "SelectableImageView.framework"
-               BlueprintName = "SelectableImageView"
-               ReferencedContainer = "container:SelectableImageView.xcodeproj">
+               BlueprintIdentifier = "FocusableImageView::FocusableImageView"
+               BuildableName = "FocusableImageView.framework"
+               BlueprintName = "FocusableImageView"
+               ReferencedContainer = "container:FocusableImageView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -1,18 +1,18 @@
 //
-//  SelectableImageViewConfiguration.swift
-//  SelectableImageView
+//  FocusableImageViewConfiguration.swift
+//  FocusableImageView
 //
 //  Created by Koji Murata on 2020/03/21.
 //
 
 import UIKit
 
-public struct SelectableImageViewConfiguration {
+public struct FocusableImageViewConfiguration {
     let backgroundColor: UIColor
     let animationDuration: TimeInterval
     let createDismissButton: ((_ parentView: UIView) -> UIButton)?
     
-    public static var `default` = SelectableImageViewConfiguration()
+    public static var `default` = FocusableImageViewConfiguration()
     
     public init(
         backgroundColor: UIColor = .init(white: 0, alpha: 0.5),

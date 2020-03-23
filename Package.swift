@@ -4,15 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "SelectableImageView",
+    name: "FocusableImageView",
     platforms: [
         .iOS(.v11),
     ],
     products: [
-        .library(name: "SelectableImageView", targets: ["SelectableImageView"]),
+        .library(name: "FocusableImageView", targets: ["FocusableImageView"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "SelectableImageView", dependencies: []),
+        .target(name: "FocusableImageView", dependencies: []),
     ]
 )

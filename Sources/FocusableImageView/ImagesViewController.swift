@@ -1,6 +1,6 @@
 //
 //  ImagesViewController.swift
-//  SelectableImageView
+//  FocusableImageView
 //
 //  Created by Koji Murata on 2020/03/20.
 //
@@ -19,9 +19,9 @@ final class ImagesViewController: UIViewController {
     
     private var pannableConstraints = [UIImageView: NSLayoutConstraint]()
     
-    private weak var delegate: SelectableImageViewDelegate?
-    private var configuration: SelectableImageViewConfiguration!
-    private var selectableImageViews: [SelectableImageView]!
+    private weak var delegate: FocusableImageViewDelegate?
+    private var configuration: FocusableImageViewConfiguration!
+    private var selectableImageViews: [FocusableImageView]!
     private var selectedImageIndex: Int!
     private var dismissButton: UIButton?
     
@@ -36,9 +36,9 @@ final class ImagesViewController: UIViewController {
     }
     
     func prepare(
-        delegate: SelectableImageViewDelegate?,
-        configuration: SelectableImageViewConfiguration,
-        selectableImageViews: [SelectableImageView],
+        delegate: FocusableImageViewDelegate?,
+        configuration: FocusableImageViewConfiguration,
+        selectableImageViews: [FocusableImageView],
         selectedImageIndex: Int
     ) {
         self.delegate = delegate

@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		OBJ_24 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ImagesViewController.swift */; };
-		OBJ_25 /* SelectableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* SelectableImageView.swift */; };
-		OBJ_26 /* SelectableImageViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* SelectableImageViewConfiguration.swift */; };
-		OBJ_27 /* SelectableImageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SelectableImageViewManager.swift */; };
+		OBJ_25 /* FocusableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* FocusableImageView.swift */; };
+		OBJ_26 /* FocusableImageViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* FocusableImageViewConfiguration.swift */; };
+		OBJ_27 /* FocusableImageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FocusableImageViewManager.swift */; };
 		OBJ_34 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		OBJ_10 /* SelectableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableImageView.swift; sourceTree = "<group>"; };
-		OBJ_11 /* SelectableImageViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableImageViewConfiguration.swift; sourceTree = "<group>"; };
-		OBJ_12 /* SelectableImageViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableImageViewManager.swift; sourceTree = "<group>"; };
+		OBJ_10 /* FocusableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageView.swift; sourceTree = "<group>"; };
+		OBJ_11 /* FocusableImageViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageViewConfiguration.swift; sourceTree = "<group>"; };
+		OBJ_12 /* FocusableImageViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageViewManager.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
-		"SelectableImageView::SelectableImageView::Product" /* SelectableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SelectableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FocusableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		OBJ_14 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"SelectableImageView::SelectableImageView::Product" /* SelectableImageView.framework */,
+				"FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -63,29 +63,29 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* SelectableImageView */,
+				OBJ_8 /* FocusableImageView */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_8 /* SelectableImageView */ = {
+		OBJ_8 /* FocusableImageView */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* ImagesViewController.swift */,
-				OBJ_10 /* SelectableImageView.swift */,
-				OBJ_11 /* SelectableImageViewConfiguration.swift */,
-				OBJ_12 /* SelectableImageViewManager.swift */,
+				OBJ_10 /* FocusableImageView.swift */,
+				OBJ_11 /* FocusableImageViewConfiguration.swift */,
+				OBJ_12 /* FocusableImageViewManager.swift */,
 			);
-			name = SelectableImageView;
-			path = Sources/SelectableImageView;
+			name = FocusableImageView;
+			path = Sources/FocusableImageView;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		"SelectableImageView::SelectableImageView" /* SelectableImageView */ = {
+		"FocusableImageView::FocusableImageView" /* FocusableImageView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_20 /* Build configuration list for PBXNativeTarget "SelectableImageView" */;
+			buildConfigurationList = OBJ_20 /* Build configuration list for PBXNativeTarget "FocusableImageView" */;
 			buildPhases = (
 				OBJ_23 /* Sources */,
 				OBJ_28 /* Frameworks */,
@@ -94,14 +94,14 @@
 			);
 			dependencies = (
 			);
-			name = SelectableImageView;
-			productName = SelectableImageView;
-			productReference = "SelectableImageView::SelectableImageView::Product" /* SelectableImageView.framework */;
+			name = FocusableImageView;
+			productName = FocusableImageView;
+			productReference = "FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"SelectableImageView::SwiftPMPackageDescription" /* SelectableImageViewPackageDescription */ = {
+		"FocusableImageView::SwiftPMPackageDescription" /* FocusableImageViewPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_30 /* Build configuration list for PBXNativeTarget "SelectableImageViewPackageDescription" */;
+			buildConfigurationList = OBJ_30 /* Build configuration list for PBXNativeTarget "FocusableImageViewPackageDescription" */;
 			buildPhases = (
 				OBJ_33 /* Sources */,
 			);
@@ -109,8 +109,8 @@
 			);
 			dependencies = (
 			);
-			name = SelectableImageViewPackageDescription;
-			productName = SelectableImageViewPackageDescription;
+			name = FocusableImageViewPackageDescription;
+			productName = FocusableImageViewPackageDescription;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +122,7 @@
 				LastSwiftMigration = 9999;
 				LastUpgradeCheck = 9999;
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "SelectableImageView" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "FocusableImageView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -134,8 +134,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"SelectableImageView::SelectableImageView" /* SelectableImageView */,
-				"SelectableImageView::SwiftPMPackageDescription" /* SelectableImageViewPackageDescription */,
+				"FocusableImageView::FocusableImageView" /* FocusableImageView */,
+				"FocusableImageView::SwiftPMPackageDescription" /* FocusableImageViewPackageDescription */,
 			);
 		};
 /* End PBXProject section */
@@ -146,9 +146,9 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_24 /* ImagesViewController.swift in Sources */,
-				OBJ_25 /* SelectableImageView.swift in Sources */,
-				OBJ_26 /* SelectableImageViewConfiguration.swift in Sources */,
-				OBJ_27 /* SelectableImageViewManager.swift in Sources */,
+				OBJ_25 /* FocusableImageView.swift in Sources */,
+				OBJ_26 /* FocusableImageViewConfiguration.swift in Sources */,
+				OBJ_27 /* FocusableImageViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,20 +172,20 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = SelectableImageView.xcodeproj/SelectableImageView_Info.plist;
+				INFOPLIST_FILE = FocusableImageView.xcodeproj/FocusableImageView_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = SelectableImageView;
+				PRODUCT_BUNDLE_IDENTIFIER = FocusableImageView;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
-				TARGET_NAME = SelectableImageView;
+				TARGET_NAME = FocusableImageView;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -200,20 +200,20 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = SelectableImageView.xcodeproj/SelectableImageView_Info.plist;
+				INFOPLIST_FILE = FocusableImageView.xcodeproj/FocusableImageView_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = SelectableImageView;
+				PRODUCT_BUNDLE_IDENTIFIER = FocusableImageView;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
-				TARGET_NAME = SelectableImageView;
+				TARGET_NAME = FocusableImageView;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -291,7 +291,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_2 /* Build configuration list for PBXProject "SelectableImageView" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "FocusableImageView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
@@ -300,7 +300,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_20 /* Build configuration list for PBXNativeTarget "SelectableImageView" */ = {
+		OBJ_20 /* Build configuration list for PBXNativeTarget "FocusableImageView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_21 /* Debug */,
@@ -309,7 +309,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_30 /* Build configuration list for PBXNativeTarget "SelectableImageViewPackageDescription" */ = {
+		OBJ_30 /* Build configuration list for PBXNativeTarget "FocusableImageViewPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_31 /* Debug */,
