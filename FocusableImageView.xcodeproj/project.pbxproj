@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		"FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FocusableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"FocusableImageView::FocusableImageView::Product" /* FocusableImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FocusableImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* FocusableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageView.swift; sourceTree = "<group>"; };
 		OBJ_11 /* FocusableImageViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageViewConfiguration.swift; sourceTree = "<group>"; };
 		OBJ_12 /* FocusableImageViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableImageViewManager.swift; sourceTree = "<group>"; };
@@ -173,9 +173,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FocusableImageView;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TARGET_NAME = FocusableImageView;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
@@ -201,9 +204,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FocusableImageView;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TARGET_NAME = FocusableImageView;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
