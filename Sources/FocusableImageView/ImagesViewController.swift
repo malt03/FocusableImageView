@@ -101,7 +101,7 @@ final class ImagesViewController: UIViewController {
     }
     
     @objc private func panned(_ sender: UIPanGestureRecognizer) {
-        guard let target = pannableConstraints.keys.first(where: { $0.bounds.contains(sender.location(in: $0)) }) else { return }
+        guard let target = pannableConstraints.keys.first(where: { (0...view.bounds.width).contains(scrollView.convert($0.center, to: view).x) }) else { return }
         switch sender.state {
         case .changed:
             let translation = sender.translation(in: view)
