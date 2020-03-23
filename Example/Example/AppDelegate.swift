@@ -7,31 +7,35 @@
 //
 
 import UIKit
+import FocusableImageView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FocusableImageViewConfiguration.default = .init(
+            backgroundColor: .init(white: 0, alpha: 0.5),
+            animationDuration: 0.5,
+            createDismissButton: { (parentView) -> UIButton in
+                let button = UIButton()
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.setTitle("Close", for: .normal)
+                button.setTitleColor(.white, for: .normal)
+                button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+                parentView.addSubview(button)
+                NSLayoutConstraint.activate([
+                    button.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: 16),
+                    button.topAnchor.constraint(equalTo: parentView.safeAreaLayoutGuide.topAnchor, constant: 16),
+                ])
+                return button
+            }
+        )
         return true
     }
 
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
-
 }
 
