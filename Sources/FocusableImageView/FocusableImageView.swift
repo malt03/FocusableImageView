@@ -9,16 +9,16 @@ import UIKit
 
 public class FocusableImageView: UIView {
     @IBInspectable public var image: UIImage? {
-        get { imageView.image }
-        set { imageView.image = newValue }
+        get { inner.image }
+        set { inner.image = newValue }
     }
     public override var contentMode: UIView.ContentMode {
-        get { imageView.contentMode }
-        set { imageView.contentMode = newValue }
+        get { inner.contentMode }
+        set { inner.contentMode = newValue }
     }
     
-    public let imageView = UIImageView()
-    private var imageViewConstraints: [NSLayoutConstraint]?
+    public let inner = UIImageView()
+    private var innerImageViewConstraints: [NSLayoutConstraint]?
     var tappedHandler: ((FocusableImageView) -> Void)?
     
     override init(frame: CGRect) {
@@ -32,7 +32,7 @@ public class FocusableImageView: UIView {
     }
     
     private func initialize() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        inner.translatesAutoresizingMaskIntoConstraints = false
         addImageView()
         
         let tapGestureRecognizer = UITapGestureRecognizer()
@@ -41,23 +41,23 @@ public class FocusableImageView: UIView {
     }
     
     func addImageView() {
-        addSubview(imageView)
+        addSubview(inner)
         let constraints = [
-            topAnchor.constraint(equalTo: imageView.topAnchor),
-            bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
-            trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            topAnchor.constraint(equalTo: inner.topAnchor),
+            bottomAnchor.constraint(equalTo: inner.bottomAnchor),
+            leadingAnchor.constraint(equalTo: inner.leadingAnchor),
+            trailingAnchor.constraint(equalTo: inner.trailingAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
-        imageViewConstraints = constraints
+        innerImageViewConstraints = constraints
     }
     
     func removeImageView() {
-        if let imageViewConstraints = imageViewConstraints {
-            NSLayoutConstraint.deactivate(imageViewConstraints)
+        if let innerImageViewConstraints = innerImageViewConstraints {
+            NSLayoutConstraint.deactivate(innerImageViewConstraints)
         }
-        imageViewConstraints = nil
-        imageView.removeFromSuperview()
+        innerImageViewConstraints = nil
+        inner.removeFromSuperview()
     }
     
     @objc private func tapped() {

@@ -170,7 +170,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         var lastAnchor = scrollContainerView.leadingAnchor
         for selectableImageView in selectableImageViews {
             selectableImageView.removeImageView()
-            let imageView = selectableImageView.imageView
+            let imageView = selectableImageView.inner
             
             scrollContainerView.addSubview(imageView)
             imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
@@ -186,7 +186,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
             pannableConstraints[imageView] = centerYConstraint
         }
         if let last = selectableImageViews.last {
-            constraints.append(last.imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor))
+            constraints.append(last.inner.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor))
         }
         
         NSLayoutConstraint.activate(constraints)
@@ -215,7 +215,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         var tmpConstraints = [NSLayoutConstraint]()
         var imageViewTargetRects = [UIImageView: CGRect]()
         for selectableImageView in self.selectableImageViews {
-            let imageView = selectableImageView.imageView
+            let imageView = selectableImageView.inner
             let newRect = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
             imageViewTargetRects[imageView] = newRect
             tmpConstraints.append(contentsOf: [
@@ -250,7 +250,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
             },
             completion: { _ in
                 NSLayoutConstraint.deactivate(tmpConstraints)
-                self.selectableImageViews.forEach { $0.imageView.removeFromSuperview() }
+                self.selectableImageViews.forEach { $0.inner.removeFromSuperview() }
                 self.selectableImageViews.forEach { $0.addImageView() }
                 transitionContext.completeTransition(true)
             }

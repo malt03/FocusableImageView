@@ -18,27 +18,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         manager.delegate = self
-        imageViews.forEach { $0.cornerRadius = 8 }
+        imageViews.forEach {
+            $0.inner.layer.cornerRadius = 8
+            $0.inner.clipsToBounds = true
+        }
         manager.register(parentViewController: self, imageViews: imageViews)
     }
 }
 
 extension ViewController: FocusableImageViewDelegate {
     func selectableImageViewPresentAnimation(views: [FocusableImageView]) {
-        views.forEach { $0.cornerRadius = 0 }
+        views.forEach { $0.inner.layer.cornerRadius = 0 }
     }
     
     func selectableImageViewDismissAnimation(views: [FocusableImageView]) {
-        views.forEach { $0.cornerRadius = 8 }
-    }
-}
-
-extension FocusableImageView {
-    var cornerRadius: CGFloat {
-        get { imageView.layer.cornerRadius }
-        set {
-            imageView.layer.cornerRadius = newValue
-            imageView.clipsToBounds = true
-        }
+        views.forEach { $0.inner.layer.cornerRadius = 8 }
     }
 }
