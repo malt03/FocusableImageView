@@ -74,6 +74,9 @@ final class ImagesViewController: UIViewController {
         backgroundView.addSubview(pageControl)
         scrollView.addSubview(scrollContainerView)
         
+        pageControl.hidesForSinglePage = configuration.pageControlConfiguration.hidesForSinglePage
+        pageControl.pageIndicatorTintColor = configuration.pageControlConfiguration.pageIndicatorTintColor
+        pageControl.currentPageIndicatorTintColor = configuration.pageControlConfiguration.currentPageIndicatorTintColor
         pageControl.numberOfPages = selectableImageViews.count
         pageControl.currentPage = selectedImageIndex
 

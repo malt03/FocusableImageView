@@ -11,7 +11,7 @@ import FocusableImageView
 
 class ViewController: UIViewController {
     @IBOutlet private weak var stackView: UIStackView!
-    private let manager = FocusableImageViewManager()
+    private lazy var manager = FocusableImageViewManager()
     private var imageViews: [FocusableImageView] { stackView.arrangedSubviews as! [FocusableImageView] }
     
     override func viewDidLoad() {

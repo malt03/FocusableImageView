@@ -13,9 +13,11 @@ public protocol FocusableImageViewDelegate: class {
 }
 
 public final class FocusableImageViewManager {
-    public init() {}
+    public init(configuration: FocusableImageViewConfiguration = .default) {
+        self.configuration = configuration
+    }
     
-    public var configuration = FocusableImageViewConfiguration.default
+    public var configuration: FocusableImageViewConfiguration
     public weak var delegate: FocusableImageViewDelegate?
     
     public func register<S: Sequence>(parentViewController: UIViewController, imageViews: S) where S.Element == FocusableImageView {
