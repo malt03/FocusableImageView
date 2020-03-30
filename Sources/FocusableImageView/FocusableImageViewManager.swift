@@ -8,8 +8,8 @@
 import UIKit
 
 public protocol FocusableImageViewDelegate: class {
-    func selectableImageViewPresentAnimation(views: [FocusableImageView])
-    func selectableImageViewDismissAnimation(views: [FocusableImageView])
+    func focusableImageViewPresentAnimation(views: [FocusableImageView])
+    func focusableImageViewDismissAnimation(views: [FocusableImageView])
 }
 
 public final class FocusableImageViewManager {

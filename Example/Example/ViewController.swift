@@ -27,11 +27,11 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: FocusableImageViewDelegate {
-    func selectableImageViewPresentAnimation(views: [FocusableImageView]) {
+    func focusableImageViewPresentAnimation(views: [FocusableImageView]) {
         views.forEach { $0.inner.layer.cornerRadius = 0 }
     }
     
-    func selectableImageViewDismissAnimation(views: [FocusableImageView]) {
+    func focusableImageViewDismissAnimation(views: [FocusableImageView]) {
         views.forEach { $0.inner.layer.cornerRadius = 8 }
     }
 }
