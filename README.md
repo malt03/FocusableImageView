@@ -63,6 +63,7 @@ extension ViewController: FocusableImageViewDelegate {
 manager.configuration = .init(
     backgroundColor: .init(white: 0, alpha: 0.5),
     animationDuration: 0.5,
+    pageControlConfiguration: .init(hidesForSinglePage: false, pageIndicatorTintColor: nil, currentPageIndicatorTintColor: nil),
     createDismissButton: { (parentView) -> UIButton in
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
