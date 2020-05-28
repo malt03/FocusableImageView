@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FocusableImageView'
-  s.version          = '0.0.4'
+  s.version          = '0.1.0'
   s.summary          = 'FocusableImageView is a library for creating focusable imageview.'
 
   s.description      = <<-DESC
