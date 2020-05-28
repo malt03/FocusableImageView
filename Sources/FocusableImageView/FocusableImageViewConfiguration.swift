@@ -11,6 +11,7 @@ public struct FocusableImageViewConfiguration {
     let backgroundColor: UIColor
     let animationDuration: TimeInterval
     let pageControlConfiguration: PageControlConfiguration
+    let maximumZoomScale: CGFloat
     let createDismissButton: ((_ parentView: UIView) -> UIButton)?
     
     public static var `default` = FocusableImageViewConfiguration()
@@ -19,11 +20,13 @@ public struct FocusableImageViewConfiguration {
         backgroundColor: UIColor = .init(white: 0, alpha: 0.5),
         animationDuration: TimeInterval = 0.3,
         pageControlConfiguration: PageControlConfiguration = .init(),
+        maximumZoomScale: CGFloat = 1,
         createDismissButton: ((_ parentView: UIView) -> UIButton)? = nil
     ) {
         self.backgroundColor = backgroundColor
         self.animationDuration = animationDuration
         self.pageControlConfiguration = pageControlConfiguration
+        self.maximumZoomScale = maximumZoomScale
         self.createDismissButton = createDismissButton
     }
 
