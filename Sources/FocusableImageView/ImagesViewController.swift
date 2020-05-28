@@ -15,9 +15,10 @@ final class ImagesViewController: UIViewController {
     
     private var presenting = true
     private var constraints: [NSLayoutConstraint]?
+    private var imageScrollViews = [UIScrollView]()
     private var lastPanInfo: (velocityY: CGFloat, targetImageView: UIImageView)?
     
-    private var pannableConstraints = [UIImageView: NSLayoutConstraint]()
+    private var pannableConstraints = [UIView: NSLayoutConstraint]()
     
     private weak var delegate: FocusableImageViewDelegate?
     private var configuration: FocusableImageViewConfiguration!
@@ -110,7 +111,7 @@ final class ImagesViewController: UIViewController {
             let translation = sender.translation(in: view)
             pannableConstraints[target]?.constant = translation.y
         case .ended, .cancelled:
-            lastPanInfo = (sender.velocity(in: view).y, target)
+            lastPanInfo = (sender.velocity(in: view).y, target.subviews.first! as! UIImageView)
             close()
         default:
             break
@@ -120,12 +121,39 @@ final class ImagesViewController: UIViewController {
     @objc private func close() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc private func doubleTapped(_ sender: UITapGestureRecognizer) {
+        let imageScrollView = (sender.view as! UIScrollView)
+        if imageScrollView.zoomScale == 1 {
+            let point = sender.location(in: imageScrollView)
+            imageScrollView.zoom(to: CGRect(origin: point, size: .zero), animated: true)
+        } else {
+            imageScrollView.setZoomScale(1, animated: true)
+        }
+    }
 }
 
 extension ImagesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView != self.scrollView { return }
         let page = Int((scrollView.contentOffset.x / scrollView.bounds.width) + 0.5)
         pageControl.currentPage = min(max(0, page), pageControl.numberOfPages - 1)
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        if scrollView == self.scrollView { return nil }
+        return scrollView.subviews.first
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if scrollView == self.scrollView { return }
+        let v = scrollView.subviews.first!
+        scrollView.contentInset = UIEdgeInsets(
+            top: max((scrollView.frame.height - v.frame.height)/2, 0),
+            left: 0,
+            bottom: max((scrollView.frame.width - v.frame.width)/2, 0),
+            right: 0
+        )
     }
 }
 
@@ -171,25 +199,54 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
         view.layoutIfNeeded()
         
         var lastAnchor = scrollContainerView.leadingAnchor
-        for selectableImageView in selectableImageViews {
+        imageScrollViews = []
+        for (i, selectableImageView) in selectableImageViews.enumerated() {
             selectableImageView.removeImageView()
             let imageView = selectableImageView.inner
+            let imageScrollView = UIScrollView()
+            imageScrollViews.append(imageScrollView)
+            imageScrollView.clipsToBounds = false
+            imageScrollView.translatesAutoresizingMaskIntoConstraints = false
+            imageScrollView.delegate = self
+            imageScrollView.maximumZoomScale = configuration.maximumZoomScale
+            imageScrollView.bouncesZoom = false
+            imageScrollView.bounces = false
+            imageScrollView.showsVerticalScrollIndicator = false
+            imageScrollView.showsHorizontalScrollIndicator = false
+            let tapGestureRecognizer = UITapGestureRecognizer()
+            tapGestureRecognizer.numberOfTapsRequired = 2
+            tapGestureRecognizer.addTarget(self, action: #selector(doubleTapped(_:)))
+            imageScrollView.addGestureRecognizer(tapGestureRecognizer)
             
-            scrollContainerView.addSubview(imageView)
-            imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: scrollContainerView)
+            scrollContainerView.addSubview(imageScrollView)
+            imageScrollView.addSubview(imageView)
+
+            imageScrollView.frame = CGRect(origin: CGPoint(x: CGFloat(i) * scrollView.bounds.width, y: 0), size: scrollView.bounds.size)
+            
             let imageRatio = imageView.image.map { $0.size.width / $0.size.height } ?? 1
-            let centerYConstraint = imageView.centerYAnchor.constraint(equalTo: scrollContainerView.centerYAnchor)
+            let inset = max((imageScrollView.bounds.height - imageScrollView.bounds.width / imageRatio) / 2, 0)
+            imageScrollView.contentInset = UIEdgeInsets(top: inset, left: 0, bottom: 0, right: 0)
+            
+            imageView.frame = selectableImageView.convert(selectableImageView.bounds, to: imageScrollView)
+            
+            let centerYConstraint = imageScrollView.centerYAnchor.constraint(equalTo: scrollContainerView.centerYAnchor)
             constraints.append(contentsOf: [
-                lastAnchor.constraint(equalTo: imageView.leadingAnchor),
-                imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+                lastAnchor.constraint(equalTo: imageScrollView.leadingAnchor),
+                scrollView.widthAnchor.constraint(equalTo: imageScrollView.widthAnchor),
+                scrollView.heightAnchor.constraint(equalTo: imageScrollView.heightAnchor),
+                imageScrollView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+                imageScrollView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+                imageScrollView.topAnchor.constraint(equalTo: imageView.topAnchor),
+                imageScrollView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+                imageScrollView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
                 imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: imageRatio),
                 centerYConstraint,
             ])
-            lastAnchor = imageView.trailingAnchor
-            pannableConstraints[imageView] = centerYConstraint
+            lastAnchor = imageScrollView.trailingAnchor
+            pannableConstraints[imageScrollView] = centerYConstraint
         }
-        if let last = selectableImageViews.last {
-            constraints.append(last.inner.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor))
+        if let last = imageScrollViews.last {
+            constraints.append(last.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor))
         }
         
         NSLayoutConstraint.activate(constraints)
@@ -210,6 +267,7 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
     }
     
     private func dismissAnimateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        imageScrollViews.forEach { $0.setZoomScale(1, animated: true) }
         if let constraints = constraints {
             NSLayoutConstraint.deactivate(constraints)
         }
