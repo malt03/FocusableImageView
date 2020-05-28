@@ -121,6 +121,16 @@ final class ImagesViewController: UIViewController {
     @objc private func close() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc private func doubleTapped(_ sender: UITapGestureRecognizer) {
+        let imageScrollView = (sender.view as! UIScrollView)
+        if imageScrollView.zoomScale == 1 {
+            let point = sender.location(in: imageScrollView)
+            imageScrollView.zoom(to: CGRect(origin: point, size: .zero), animated: true)
+        } else {
+            imageScrollView.setZoomScale(1, animated: true)
+        }
+    }
 }
 
 extension ImagesViewController: UIScrollViewDelegate {
@@ -203,6 +213,10 @@ extension ImagesViewController: UIViewControllerAnimatedTransitioning {
             imageScrollView.bounces = false
             imageScrollView.showsVerticalScrollIndicator = false
             imageScrollView.showsHorizontalScrollIndicator = false
+            let tapGestureRecognizer = UITapGestureRecognizer()
+            tapGestureRecognizer.numberOfTapsRequired = 2
+            tapGestureRecognizer.addTarget(self, action: #selector(doubleTapped(_:)))
+            imageScrollView.addGestureRecognizer(tapGestureRecognizer)
             
             scrollContainerView.addSubview(imageScrollView)
             imageScrollView.addSubview(imageView)
